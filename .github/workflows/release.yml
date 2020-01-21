@@ -22,7 +22,7 @@ jobs:
       run: ./build.bat
     
     - name: Upload Windows Build
-      uses: actions/upload-artifact@master
+      uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: build/libqvb.a
@@ -56,7 +56,7 @@ jobs:
       run: chmod +x ./build.sh && ./build.sh
     
     - name: Upload macOS Build
-      uses: actions/upload-artifact@master
+      uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: build/libqvb.a
@@ -90,7 +90,7 @@ jobs:
       run: chmod +x ./build.sh && ./build.sh
       
     - name: Upload Linux Build
-      uses: actions/upload-artifact@master
+      uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: build/libqvb.a
