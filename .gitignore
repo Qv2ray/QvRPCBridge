@@ -1,0 +1,6 @@
+# GoLand Trash
+/.idea/
+*.iml
+
+# Built files
+/build/
