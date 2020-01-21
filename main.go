@@ -17,7 +17,16 @@ func main() {}
 var client *grpc.ClientConn
 
 //export Dial
-func Dial(addr string, timeout uint32) (errMsg string) {
+func Dial(addr *C.char, timeout uint32) (errMsg *C.char) {
+	return C.CString(_Dial(C.GoString(addr), timeout))
+}
+
+//export GetStats
+func GetStats(name *C.char, timeout uint32) (value int64) {
+	return _GetStats(C.GoString(name), timeout)
+}
+
+func _Dial(addr string, timeout uint32) (errMsg string) {
 	ctx, cancelFunc := context.WithCancel(context.Background())
 	errPipe := make(chan error)
 	goodPipe := make(chan struct{})
@@ -46,8 +55,7 @@ func Dial(addr string, timeout uint32) (errMsg string) {
 	}
 }
 
-//export GetStats
-func GetStats(name string, timeout uint32) (value int64) {
+func _GetStats(name string, timeout uint32) (value int64) {
 	if client == nil {
 		return -999
 	}
