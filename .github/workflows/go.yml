@@ -24,7 +24,7 @@ jobs:
     - name: Upload Windows Build
       uses: actions/upload-artifact@master
       with:
-        name: libqvb.a
+        name: libqvb-win64.a
         path: build/libqvb.a
 
   build-macOS:
@@ -55,7 +55,7 @@ jobs:
     - name: Upload macOS Build
       uses: actions/upload-artifact@master
       with:
-        name: libqvb.a
+        name: libqvb-darwin.a
         path: build/libqvb.a
 
   build-linux:
@@ -86,5 +86,5 @@ jobs:
     - name: Upload Linux Build
       uses: actions/upload-artifact@master
       with:
-        name: libqvb.a
+        name: libqvb-linux64.a
         path: build/libqvb.a
