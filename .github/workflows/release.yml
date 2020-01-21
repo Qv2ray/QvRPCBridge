@@ -26,7 +26,7 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: build/libqvb.a
-        asset_name: libqvb-${{ github.ref }}-win64.a
+        asset_name: libqvb-win64.a
         tag: ${{ github.ref }}
         overwrite: true
 
@@ -60,7 +60,7 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: build/libqvb.a
-        asset_name: libqvb-${{ github.ref }}-darwin.a
+        asset_name: libqvb-darwin.a
         tag: ${{ github.ref }}
         overwrite: true
 
@@ -94,6 +94,6 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: build/libqvb.a
-        asset_name: libqvb-${{ github.ref }}-linux64.a
+        asset_name: libqvb-linux64.a
         tag: ${{ github.ref }}
         overwrite: true
