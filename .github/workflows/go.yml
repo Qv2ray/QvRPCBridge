@@ -25,4 +25,4 @@ jobs:
         fi
 
     - name: Build
-      run: ./build.sh
+      run: chmod +x ./build.sh && ./build.sh
