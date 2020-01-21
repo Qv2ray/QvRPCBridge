@@ -26,7 +26,7 @@ jobs:
     - name: Build
       run: chmod +x ./build.sh && ./build.sh
     
-    - name: Upload Linux Build
+    - name: Upload macOS Build
       uses: actions/upload-artifact@master
       with:
         name: libqvb.a
