@@ -2,5 +2,5 @@
 /.idea/
 *.iml
 
-# Built files
-/build/
+# Built binary
+/build/libqvb.a
