@@ -27,6 +27,10 @@ func GetStats(name *C.char, timeout uint32) (value int64) {
 }
 
 func _Dial(addr string, timeout uint32) (errMsg string) {
+	if client != nil {
+		_ = client.Close()
+	}
+
 	ctx, cancelFunc := context.WithCancel(context.Background())
 	errPipe := make(chan error)
 	goodPipe := make(chan struct{})
