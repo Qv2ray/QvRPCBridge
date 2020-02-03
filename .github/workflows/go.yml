@@ -1,8 +1,35 @@
 name: Push Build
 on: [push]
 jobs:
-  build-windows:
-    name: Build Windows
+  
+  build-windows-32:
+    name: Build Windows 32
+    runs-on: [windows-latest]
+    steps:
+      - name: Download Go 1.13.7-win32
+        run: |
+          curl -O go.zip -L https://dl.google.com/go/go1.13.7.windows-386.zip
+          Expand-Archive -Path go.zip -DestinationPath .
+      - name: Check out code
+        uses: actions/checkout@v1
+      - name: Get dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          go get -v -t -d ./...
+
+      - name: Build Windows 32bit
+        shell: cmd
+        run: |
+          ./go/bin/go build -buildmode=c-archive -ldflags "-s -w" -o build\libqvb-32.a main.go
+
+      - name: Upload Windows 64bit
+        uses: actions/upload-artifact@master
+        with:
+          name: libqvb-win32.a
+          path: build/libqvb-32.a
+
+  build-windows-64:
+    name: Build Windows 64
     runs-on: [windows-latest]
     steps:
     - name: Set up Go 1.13
@@ -36,18 +63,6 @@ jobs:
       with:
         name: libqvb-win64.a
         path: build/libqvb-64.a
-
-    - name: Build Windows 32bit
-      shell: cmd
-      run: |
-        set GOARCH=386
-        go build -buildmode=c-archive -ldflags "-s -w" -o build\libqvb-32.a main.go
-    
-    - name: Upload Windows 32bit
-      uses: actions/upload-artifact@master
-      with:
-        name: libqvb-win32.a
-        path: build/libqvb-32.a
 
   build-macOS:
     name: Build macOS
