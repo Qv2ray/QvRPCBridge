@@ -29,23 +29,19 @@ jobs:
     - name: Build Windows 64bit
       shell: cmd
       run: |
-        pushd %cd%
-        ./build.bat
-        popd
-    
+        go build -buildmode=c-archive -ldflags "-s -w" -o build\libqvb-64.a main.go
+
     - name: Upload Windows 64bit
       uses: actions/upload-artifact@master
       with:
         name: libqvb-win64.a
-        path: build/libqvb.a
+        path: build/libqvb-64.a
 
     - name: Build Windows 32bit
       shell: cmd
       run: |
-        pushd %cd%
         set GOARCH=386
-        ./build.bat
-        popd
+        go build -buildmode=c-archive -ldflags "-s -w" -o build\libqvb-32.a main.go
     
     - name: Upload Windows 32bit
       uses: actions/upload-artifact@master
