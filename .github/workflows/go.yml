@@ -10,18 +10,16 @@ jobs:
         uses: actions/checkout@v1
       - name: Download Go 1.13.7-win32
         run: |
-          curl -o go.zip -L https://dl.google.com/go/go1.13.7.windows-386.zip
-          Expand-Archive -Path go.zip -DestinationPath .
-      - name: Download Go 1.13.7-win32
+          curl -o go.msi -L https://dl.google.com/go/go1.13.7.windows-386.msi
+          msiexec /i go.msi /quiet /qn /norestart
+      - name: Compile
         shell: cmd
         run: |
           set GOARCH=386
           set GOOS=windows
           set CGO_ENABLED=1
-          set GOTOOLDIR=%cd%/go/pkg/windows_386
-          set GOROOT=%cd%/go
-          .\go\bin\go.exe env
-          .\go\bin\go.exe build -buildmode=c-archive -ldflags "-s -w" -o build\libqvb-32.a main.go
+          go env
+          go build -buildmode=c-archive -ldflags "-s -w" -o build\libqvb-32.a main.go
 
       - name: Upload Windows 64bit
         uses: actions/upload-artifact@master
