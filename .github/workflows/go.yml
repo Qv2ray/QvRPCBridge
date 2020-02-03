@@ -8,8 +8,6 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v1
-      - name: Install GCC
-        run: choco install mingw --force --force-dependencies
         
       - name: Download Go 1.13.7-win32
         uses: DuckSoft/setup-go-win32@v999
@@ -22,6 +20,11 @@ jobs:
           set GOARCH=386
           set GOOS=windows
           set CGO_ENABLED=1
+          set CGO_CFLAGS="-g -O2 -march=win32"
+          set CGO_CPPFLAGS="-march=win32"
+          set CGO_CXXFLAGS="-g -O2 -march=win32"
+          set CGO_FFLAGS="-g -O2"
+          set CGO_LDFLAGS="-g -O2 -mi386pe"
           go env
           go build -buildmode=c-archive -ldflags "-s -w" -o build\libqvb-32.a main.go
 
