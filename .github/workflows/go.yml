@@ -27,7 +27,11 @@ jobs:
         go get -v -t -d ./...
 
     - name: Build Windows 64bit
-      run: ./build.bat
+      shell: cmd
+      run: |
+        pushd %cd%
+        ./build.bat
+        popd
     
     - name: Upload Windows 64bit
       uses: actions/upload-artifact@master
@@ -38,8 +42,10 @@ jobs:
     - name: Build Windows 32bit
       shell: cmd
       run: |
+        pushd %cd%
         set GOARCH=386
         ./build.bat
+        popd
     
     - name: Upload Windows 32bit
       uses: actions/upload-artifact@master
