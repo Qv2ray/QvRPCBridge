@@ -6,22 +6,12 @@ jobs:
     name: Build Windows 32
     runs-on: [windows-latest]
     steps:
-      - name: Download Go 1.13.7-win32
+      - name: Check out code
+        uses: actions/checkout@v1
+      - name: Build with Go 1.13.7-win32
         run: |
           curl -o go.zip -L https://dl.google.com/go/go1.13.7.windows-386.zip
           Expand-Archive -Path go.zip -DestinationPath .
-          ls .
-          ls ./go
-          ls ./go/bin
-      - name: Check out code
-        uses: actions/checkout@v1
-      - name: Get dependencies
-        run: |
-          ./go/bin/go.exe get -v -t -d ./...
-
-      - name: Build Windows 32bit
-        shell: cmd
-        run: |
           ./go/bin/go.exe build -buildmode=c-archive -ldflags "-s -w" -o build\libqvb-32.a main.go
 
       - name: Upload Windows 64bit
