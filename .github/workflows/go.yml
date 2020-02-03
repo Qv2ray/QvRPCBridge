@@ -11,6 +11,8 @@ jobs:
         
       - name: Download Go 1.13.7-win32
         uses: DuckSoft/setup-go-win32@v999
+        with:
+          go-version: 1.13
         
       - name: Compile
         shell: cmd
