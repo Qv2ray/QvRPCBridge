@@ -47,7 +47,7 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: libqvb-win32.a
-        path: build/libqvb.a
+        path: build/libqvb-32.a
 
   build-macOS:
     name: Build macOS
