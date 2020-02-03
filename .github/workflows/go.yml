@@ -13,9 +13,8 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v1
       - name: Get dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          go get -v -t -d ./...
+          ./go/bin/go get -v -t -d ./...
 
       - name: Build Windows 32bit
         shell: cmd
