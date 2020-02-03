@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v1
+      - name: Install GCC
+        run: choco install mingw --force --force-dependencies
         
       - name: Download Go 1.13.7-win32
         uses: DuckSoft/setup-go-win32@v999
