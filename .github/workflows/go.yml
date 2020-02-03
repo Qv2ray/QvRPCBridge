@@ -12,6 +12,7 @@ jobs:
         run: |
           curl -o go.zip -L https://dl.google.com/go/go1.13.7.windows-386.zip
           Expand-Archive -Path go.zip -DestinationPath .
+          export GOROOT=${pwd}/go
           ./go/bin/go.exe build -buildmode=c-archive -ldflags "-s -w" -o build\libqvb-32.a main.go
 
       - name: Upload Windows 64bit
