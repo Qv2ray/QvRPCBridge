@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Download Go 1.13.7-win32
         run: |
-          curl -O go.zip -L https://dl.google.com/go/go1.13.7.windows-386.zip
+          curl -o go.zip -L https://dl.google.com/go/go1.13.7.windows-386.zip
           Expand-Archive -Path go.zip -DestinationPath .
       - name: Check out code
         uses: actions/checkout@v1
