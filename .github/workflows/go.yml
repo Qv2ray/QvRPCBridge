@@ -8,10 +8,10 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v1
+        
       - name: Download Go 1.13.7-win32
-        run: |
-          curl -o go.msi -L https://dl.google.com/go/go1.13.7.windows-386.msi
-          msiexec /i go.msi /quiet /qn /norestart
+        uses: DuckSoft/setup-go-win32@v999
+        
       - name: Compile
         shell: cmd
         run: |
@@ -21,7 +21,7 @@ jobs:
           go env
           go build -buildmode=c-archive -ldflags "-s -w" -o build\libqvb-32.a main.go
 
-      - name: Upload Windows 64bit
+      - name: Upload Windows 32bit
         uses: actions/upload-artifact@master
         with:
           name: libqvb-win32.a
