@@ -69,7 +69,7 @@ func _GetStats(name string, timeout uint32) (value int64) {
 	go func() {
 		stats, err := cmd.NewStatsServiceClient(client).GetStats(ctx, &cmd.GetStatsRequest{
 			Name:   name,
-			Reset_: false,
+			Reset_: true,
 		})
 		select {
 		case <-ctx.Done():
